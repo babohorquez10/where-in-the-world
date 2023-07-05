@@ -1,3 +1,3 @@
 export default function DarkModeToggle() {
-  return <span>Dark Mode</span>;
+  return <span className="font-semibold">Dark Mode</span>;
 }

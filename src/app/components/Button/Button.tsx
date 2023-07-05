@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps & React.HTMLProps<HTMLButtonElement>> = (
   return (
     <button
       {...props}
-      className={`drop-shadow-md py-2 px-10 bg-white rounded ${
+      className={`drop-shadow-md py-2 px-10 bg-white rounded font-light ${
         props.className || ""
       }`}
     >

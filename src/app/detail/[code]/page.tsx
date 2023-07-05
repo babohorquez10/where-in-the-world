@@ -30,7 +30,7 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
           <Button onClick={() => router.back()}>Back</Button>
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-40">
+      <div className="flex gap-40">
         <div className="align-left">
           <img
             className="max-h-96"
@@ -38,37 +38,42 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
             alt={country.flags.alt}
           />
         </div>
-        <div className="h-fit self-center">
-          <h2 className="text-3xl mb-10">{country.name.common}</h2>
+        <div className="h-fit self-center flex-1">
+          <h2 className="text-2xl mb-10 font-extrabold">
+            {country.name.common}
+          </h2>
 
-          <div className="flex justify-between">
+          <div className="flex gap-40">
             <div>
-              <div>
-                <strong>Native Name:</strong>{" "}
+              <div className="font-light mb-2">
+                <span className="font-semibold">Native Name:</span>{" "}
                 {Object.values(country.name.nativeName)[0]?.common}
               </div>
-              <div>
-                <strong>Population:</strong> {country.population}
+              <div className="font-light mb-2">
+                <span className="font-semibold">Population:</span>{" "}
+                {country.population}
               </div>
-              <div>
-                <strong>Region:</strong> {country.region}
+              <div className="font-light mb-2">
+                <span className="font-semibold">Region:</span> {country.region}
               </div>
-              <div>
-                <strong>Sub Region:</strong> {country.subregion}
+              <div className="font-light mb-2">
+                <span className="font-semibold">Sub Region:</span>{" "}
+                {country.subregion}
               </div>
-              <div>
-                <strong>Capital:</strong> {country.capital}
+              <div className="font-light mb-2">
+                <span className="font-semibold">Capital:</span>{" "}
+                {country.capital}
               </div>
             </div>
             <div>
-              <div>
-                <strong>Currencies:</strong>{" "}
+              <div className="font-light mb-2">
+                <strong className="font-semibold">Currencies:</strong>{" "}
                 {Object.values(country.currencies)
                   .map((currency) => currency.name)
                   .join(", ")}
               </div>
-              <div>
-                <strong>Languages:</strong>{" "}
+              <div className="font-light mb-2">
+                <strong className="font-semibold">Languages:</strong>{" "}
                 {Object.values(country.languages).join(", ")}
               </div>
             </div>
@@ -76,7 +81,7 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
 
           {country.borders && country.borders.length > 0 && (
             <div className="mt-10">
-              <strong className="mr-4">Border Countries: </strong>
+              <span className="mr-4 font-semibold">Border Countries: </span>
               <span className="inline-block">
                 <span className="flex gap-4 flex-wrap">
                   {country.borders?.map((countryCode) => (

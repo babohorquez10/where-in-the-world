@@ -17,15 +17,16 @@ const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
           alt={country.flags.alt}
         />
         <div className="px-4 py-6 flex-1 flex flex-col">
-          <h4 className="font-bold text-xl mb-4">{country.name.common}</h4>
-          <h5>
-            <strong>Population:</strong> {country.population}
+          <h4 className="font-extrabold text-xl mb-4">{country.name.common}</h4>
+          <h5 className="font-light">
+            <span className="font-semibold">Population:</span>{" "}
+            {country.population}
           </h5>
-          <h5>
-            <strong>Region:</strong> {country.region}
+          <h5 className="font-light">
+            <span className="font-semibold">Region:</span> {country.region}
           </h5>
-          <h5>
-            <strong>Capital:</strong> {country.capital}
+          <h5 className="font-light">
+            <span className="font-semibold">Capital:</span> {country.capital}
           </h5>
         </div>
       </div>
