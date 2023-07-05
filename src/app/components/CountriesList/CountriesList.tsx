@@ -34,15 +34,15 @@ export default function CountriesList() {
 
   return (
     <section>
-      <div className="mb-16 flex justify-between">
+      <div className="mb-16 md:flex justify-between">
         <input
-          className="py-4 px-10 rounded-md drop-shadow"
+          className="py-4 px-4 md:px-10 rounded-md drop-shadow block md:inline w-full md:w-auto mb-6 md:mb-0"
           placeholder="Search for a country..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className="py-4 px-10 rounded-md drop-shadow"
+          className="py-4 px-4 md:px-10 rounded-md drop-shadow md:w-auto w-1/2"
           value={regionFilter}
           onChange={(e) => setRegionFilter(e.target.value)}
         >

@@ -21,13 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunitoSans.className}>
       <body>
-        <nav className="h-20 flex items-center px-24 mb-16 justify-between drop-shadow">
+        <nav className="h-20 flex items-center justify-between drop-shadow px-6 md:px-24 mb-10 md:mb-16">
           <Link href={"/"}>
-            <h1 className="text-2xl font-extrabold">Where in the world?</h1>
+            <h1 className="md:text-2xl font-extrabold">Where in the world?</h1>
           </Link>
           <DarkModeToggle />
         </nav>
-        <div className="container mx-auto px-4 mb-16">{children}</div>
+        <div className="container mx-auto px-6 mb-16">{children}</div>
       </body>
     </html>
   );
