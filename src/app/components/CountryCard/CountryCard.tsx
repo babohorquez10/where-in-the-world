@@ -10,7 +10,7 @@ type CountryCardProps = {
 const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
   return (
     <Link href={`/detail/${country.cca2}`}>
-      <div className="bg-white rounded-lg overflow-hidden cursor-pointer drop-shadow-md h-full flex flex-col">
+      <div className="card-container rounded-lg overflow-hidden cursor-pointer drop-shadow-md h-full flex flex-col">
         <img
           className="w-full"
           src={country.flags.png}

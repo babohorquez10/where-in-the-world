@@ -36,13 +36,13 @@ export default function CountriesList() {
     <section>
       <div className="mb-16 flex justify-between">
         <input
-          className="py-4 px-10 rounded-md bg-white drop-shadow"
+          className="py-4 px-10 rounded-md drop-shadow"
           placeholder="Search for a country..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className="py-4 px-10 rounded-md bg-white drop-shadow"
+          className="py-4 px-10 rounded-md drop-shadow"
           value={regionFilter}
           onChange={(e) => setRegionFilter(e.target.value)}
         >
@@ -54,7 +54,7 @@ export default function CountriesList() {
           <option value="Oceania">Oceania</option>
         </select>
       </div>
-      <div className="grid grid-cols-4 gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-16">
         {filteredCountries.map((item) => (
           <div key={item.cca2}>
             <CountryCard country={item} />

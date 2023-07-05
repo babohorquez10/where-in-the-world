@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunitoSans.className}>
       <body>
-        <nav className="h-20 flex items-center px-24 bg-white mb-16 justify-between drop-shadow">
+        <nav className="h-20 flex items-center px-24 mb-16 justify-between drop-shadow">
           <Link href={"/"}>
             <h1 className="text-2xl font-extrabold">Where in the world?</h1>
           </Link>
