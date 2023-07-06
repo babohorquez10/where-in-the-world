@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { data } from "../utils/mockData";
+import { data } from "../__mocks__/mockData";
 import CountryCard from "@/app/components/CountryCard/CountryCard";
 import { Country } from "@/models/interfaces/country.interface";
 import "@testing-library/jest-dom";

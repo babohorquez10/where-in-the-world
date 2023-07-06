@@ -1,40 +1,32 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import CountryCard from "../CountryCard/CountryCard";
-import { Country } from "@/models/interfaces/country.interface";
-import { BsSearch } from "react-icons/bs";
 import Loader from "../Loader/Loader";
-import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useSelector } from "react-redux";
+import { fetchCountries } from "@/reducers/countries.actions";
+import { useAppDispatch } from "@/utils/hooks";
+import {
+  selectCountries,
+  selectError,
+  selectLoading,
+} from "@/reducers/countries.selectors";
+import SearchInput from "../SearchInput/SearchInput";
+import RegionFilter from "../RegionFilter/RegionFilter";
 
 export default function CountriesList() {
-  const [loading, setLoading] = useState(true);
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [search, setSearch] = useState("");
+  const dispatch = useAppDispatch();
+
   const [regionFilter, setRegionFilter] = useState("");
-  const [error, setError] = useState();
 
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const countries = useSelector(selectCountries);
+  const error = useSelector(selectError);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
-    axios
-      .get(
-        "https://restcountries.com/v3.1/all?fields=cca2,name,flags,population,region,capital"
-      )
-      .then((resp) => {
-        setCountries(resp.data);
-      })
-      .catch((err) => setError(err));
+    dispatch(fetchCountries());
   }, []);
-
-  useEffect(() => {
-    if (countries || error) setLoading(false);
-  }, [countries, error]);
-
-  const handleSearchIconClick = () => {
-    searchInputRef?.current?.focus();
-  };
 
   if (loading) {
     return <Loader />;
@@ -44,47 +36,14 @@ export default function CountriesList() {
     return <ErrorMessage />;
   }
 
-  const filteredCountries = countries.filter(
-    (country) =>
-      country.name.common.toLowerCase().includes(search.trim().toLowerCase()) &&
-      country.region
-        .toLowerCase()
-        .includes(regionFilter.trim().toLocaleLowerCase())
-  );
-
   return (
     <section>
       <div className="mb-16 md:flex justify-between">
-        <div className="relative">
-          <span
-            className="absolute z-50 mt-4 ml-4 md:ml-10 cursor-text"
-            onClick={handleSearchIconClick}
-          >
-            <BsSearch className="search-icon" fontSize={"1.4rem"} />
-          </span>
-          <input
-            ref={searchInputRef}
-            className="py-4 px-14 md:px-24 pr-4 rounded-md drop-shadow block md:inline w-full md:w-search mb-6 md:mb-0"
-            placeholder="Search for a country..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <select
-          className="py-4 px-4 md:px-10 rounded-md drop-shadow md:w-auto w-1/2"
-          value={regionFilter}
-          onChange={(e) => setRegionFilter(e.target.value)}
-        >
-          <option value="">Filter by Region</option>
-          <option value="Africa">Africa</option>
-          <option value="Americas">Americas</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
-        </select>
+        <SearchInput />
+        <RegionFilter />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-16">
-        {filteredCountries.map((item) => (
+        {countries.map((item) => (
           <div key={item.cca2}>
             <CountryCard country={item} />
           </div>

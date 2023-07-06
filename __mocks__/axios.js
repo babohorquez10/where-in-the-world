@@ -1,4 +1,4 @@
-import { data } from "../utils/mockData";
+import { data } from "./mockData";
 const mockAxios = jest.genMockFromModule("axios");
 
 mockAxios.get = jest.fn(() =>
