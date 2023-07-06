@@ -42,3 +42,7 @@ nav {
 .card-container {
   background-color: var(--elements-background);
 }
+
+.search-icon {
+  color: var(--input-text-color);
+}

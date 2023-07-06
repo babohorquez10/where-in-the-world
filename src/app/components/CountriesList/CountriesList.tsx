@@ -1,14 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CountryCard from "../CountryCard/CountryCard";
 import { Country } from "@/models/interfaces/country.interface";
+import { BsSearch } from "react-icons/bs";
 
 export default function CountriesList() {
   const [loading, setLoading] = useState(true);
   const [countries, setCountries] = useState<Country[]>([]);
   const [search, setSearch] = useState("");
   const [regionFilter, setRegionFilter] = useState("");
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch(
@@ -21,6 +24,10 @@ export default function CountriesList() {
   useEffect(() => {
     if (countries) setLoading(false);
   }, [countries]);
+
+  const handleSearchIconClick = () => {
+    searchInputRef?.current?.focus();
+  };
 
   if (loading) return <section>Loading...</section>;
 
@@ -35,12 +42,21 @@ export default function CountriesList() {
   return (
     <section>
       <div className="mb-16 md:flex justify-between">
-        <input
-          className="py-4 px-4 md:px-10 rounded-md drop-shadow block md:inline w-full md:w-auto mb-6 md:mb-0"
-          placeholder="Search for a country..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="relative">
+          <span
+            className="absolute z-50 mt-4 ml-4 md:ml-10 cursor-text"
+            onClick={handleSearchIconClick}
+          >
+            <BsSearch className="search-icon" fontSize={"1.4rem"} />
+          </span>
+          <input
+            ref={searchInputRef}
+            className="py-4 px-14 md:px-24 pr-4 rounded-md drop-shadow block md:inline w-full md:w-search mb-6 md:mb-0"
+            placeholder="Search for a country..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
         <select
           className="py-4 px-4 md:px-10 rounded-md drop-shadow md:w-auto w-1/2"
           value={regionFilter}

@@ -2,9 +2,10 @@
 
 import Button from "@/app/components/Button/Button";
 import { Country } from "@/models/interfaces/country.interface";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { BiArrowBack } from "react-icons/bi";
+import Link from "next/link";
 
 type DetailProps = {
   params?: any;
@@ -27,7 +28,12 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
     <main>
       <div className="my-20">
         <Link href={"/"}>
-          <Button onClick={() => router.back()}>Back</Button>
+          <Button onClick={() => router.back()}>
+            <div className="flex items-center gap-2">
+              <BiArrowBack fontSize={"1.25rem"} />
+              Back
+            </div>
+          </Button>
         </Link>
       </div>
       <div className="flex gap-40">
