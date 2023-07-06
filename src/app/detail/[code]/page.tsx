@@ -120,7 +120,9 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
                 <span className="flex gap-4 flex-wrap">
                   {country.borders?.map((countryCode) => (
                     <Link key={countryCode} href={`/detail/${countryCode}`}>
-                      <Button>{countryCode}</Button>
+                      <Button data-testid="border-country-button">
+                        {countryCode}
+                      </Button>
                     </Link>
                   ))}
                 </span>

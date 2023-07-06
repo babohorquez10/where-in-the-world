@@ -23,6 +23,15 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "__tests__/countriesList.test.tsx",
+    "__tests__/countryCard.test.tsx",
+    "__tests__/countryDetail.test.jsx",
+    "__mocks__/axios.js"
+  ],
   "exclude": ["node_modules"]
 }
