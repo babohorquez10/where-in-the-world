@@ -8,6 +8,10 @@
 - Axios.
 - Jest.
 - React Testing Library.
+- Redux.
+
+**Note**
+I created two branches for this project. In branch ``main`` I used local states for state-management. In branch ``redux`` I used react-redux and redux-toolkit for state-management.
 
 ## Run project
 
