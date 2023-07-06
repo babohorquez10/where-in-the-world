@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import axios from "axios";
-import { data } from "../utils/mockData";
+import { data } from "../__mocks__/mockData";
 import Detail from "@/app/detail/[code]/page";
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
