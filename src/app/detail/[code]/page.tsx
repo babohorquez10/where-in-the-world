@@ -7,6 +7,8 @@ import { BiArrowBack } from "react-icons/bi";
 import Link from "next/link";
 import Button from "@/app/components/Button/Button";
 import Loader from "@/app/components/Loader/Loader";
+import axios from "axios";
+import ErrorMessage from "@/app/components/ErrorMessage/ErrorMessage";
 
 type DetailProps = {
   params?: any;
@@ -17,23 +19,27 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
 
   const [country, setCountry] = useState<Country>();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
 
   useEffect(() => {
-    fetch(`https://restcountries.com/v3.1/alpha/${params?.code}`)
-      .then((resp) => resp.json())
-      .then((data) => setCountry(data[0]));
+    axios
+      .get(`https://restcountries.com/v3.1/alpha/${params?.code}`)
+      .then((resp) => {
+        setCountry(resp.data[0]);
+      })
+      .catch((err) => setError(err));
   }, [params?.code]);
 
   useEffect(() => {
-    if (country) setLoading(false);
-  }, [country]);
+    if (country || error) setLoading(false);
+  }, [country, error]);
 
   if (loading) {
     return <Loader />;
   }
 
-  if (!country) {
-    return <div></div>;
+  if (error || !country) {
+    return <ErrorMessage />;
   }
 
   return (
@@ -63,13 +69,16 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
 
           <div className="flex gap-0 md:gap-20 lg:gap-40 flex-col md:flex-row">
             <div>
-              <div className="font-light mb-2">
-                <span className="font-semibold">Native Name:</span>{" "}
-                {Object.values(country.name.nativeName)[0]?.common}
-              </div>
+              {country.name.nativeName && (
+                <div className="font-light mb-2">
+                  <span className="font-semibold">Native Name:</span>{" "}
+                  {Object.values(country.name.nativeName)[0]?.common}
+                </div>
+              )}
+
               <div className="font-light mb-2">
                 <span className="font-semibold">Population:</span>{" "}
-                {country.population}
+                {country.population.toLocaleString("en-US")}
               </div>
               <div className="font-light mb-2">
                 <span className="font-semibold">Region:</span> {country.region}
@@ -84,16 +93,21 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
               </div>
             </div>
             <div>
-              <div className="font-light mb-2">
-                <strong className="font-semibold">Currencies:</strong>{" "}
-                {Object.values(country.currencies)
-                  .map((currency) => currency.name)
-                  .join(", ")}
-              </div>
-              <div className="font-light mb-2">
-                <strong className="font-semibold">Languages:</strong>{" "}
-                {Object.values(country.languages).join(", ")}
-              </div>
+              {country.currencies && (
+                <div className="font-light mb-2">
+                  <strong className="font-semibold">Currencies:</strong>{" "}
+                  {Object.values(country.currencies)
+                    .map((currency) => currency.name)
+                    .join(", ")}
+                </div>
+              )}
+
+              {country.languages && (
+                <div className="font-light mb-2">
+                  <strong className="font-semibold">Languages:</strong>{" "}
+                  {Object.values(country.languages).join(", ")}
+                </div>
+              )}
             </div>
           </div>
 

@@ -20,7 +20,7 @@ const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
           <h4 className="font-extrabold text-xl mb-4">{country.name.common}</h4>
           <h5 className="font-light">
             <span className="font-semibold">Population:</span>{" "}
-            {country.population}
+            {country.population.toLocaleString("en-US")}
           </h5>
           <h5 className="font-light">
             <span className="font-semibold">Region:</span> {country.region}

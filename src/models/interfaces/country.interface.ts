@@ -1,7 +1,7 @@
 type CountryName = {
   common: string;
   official: string;
-  nativeName: Object;
+  nativeName?: Object;
 };
 
 type CountryFlags = {
@@ -17,9 +17,9 @@ export interface Country {
   population: number;
   region: string;
   subregion: string;
-  currencies: Object;
+  currencies?: Object;
   capital: string;
   flags: CountryFlags;
-  languages: Object;
+  languages?: Object;
   borders?: string[];
 }

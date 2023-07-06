@@ -5,37 +5,43 @@ import CountryCard from "../CountryCard/CountryCard";
 import { Country } from "@/models/interfaces/country.interface";
 import { BsSearch } from "react-icons/bs";
 import Loader from "../Loader/Loader";
+import axios from "axios";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 export default function CountriesList() {
   const [loading, setLoading] = useState(true);
   const [countries, setCountries] = useState<Country[]>([]);
   const [search, setSearch] = useState("");
   const [regionFilter, setRegionFilter] = useState("");
+  const [error, setError] = useState();
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    fetch(
-      "https://restcountries.com/v3.1/all?fields=cca2,name,flags,population,region,capital"
-    )
-      .then((resp) => resp.json())
-      .then((data) => setCountries(data));
-  });
+    axios
+      .get(
+        "https://restcountries.com/v3.1/all?fields=cca2,name,flags,population,region,capital"
+      )
+      .then((resp) => {
+        setCountries(resp.data);
+      })
+      .catch((err) => setError(err));
+  }, []);
 
   useEffect(() => {
-    if (countries) setLoading(false);
-  }, [countries]);
+    if (countries || error) setLoading(false);
+  }, [countries, error]);
 
   const handleSearchIconClick = () => {
     searchInputRef?.current?.focus();
   };
 
   if (loading) {
-    return (
-      <section>
-        <Loader />
-      </section>
-    );
+    return <Loader />;
+  }
+
+  if (error) {
+    return <ErrorMessage />;
   }
 
   const filteredCountries = countries.filter(
