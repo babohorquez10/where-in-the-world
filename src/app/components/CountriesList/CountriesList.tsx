@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import CountryCard from "../CountryCard/CountryCard";
 import { Country } from "@/models/interfaces/country.interface";
 import { BsSearch } from "react-icons/bs";
+import Loader from "../Loader/Loader";
 
 export default function CountriesList() {
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,13 @@ export default function CountriesList() {
     searchInputRef?.current?.focus();
   };
 
-  if (loading) return <section>Loading...</section>;
+  if (loading) {
+    return (
+      <section>
+        <Loader />
+      </section>
+    );
+  }
 
   const filteredCountries = countries.filter(
     (country) =>
@@ -64,7 +71,7 @@ export default function CountriesList() {
         >
           <option value="">Filter by Region</option>
           <option value="Africa">Africa</option>
-          <option value="America">America</option>
+          <option value="Americas">Americas</option>
           <option value="Asia">Asia</option>
           <option value="Europe">Europe</option>
           <option value="Oceania">Oceania</option>

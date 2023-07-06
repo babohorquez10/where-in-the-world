@@ -1,11 +1,12 @@
 "use client";
 
-import Button from "@/app/components/Button/Button";
 import { Country } from "@/models/interfaces/country.interface";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BiArrowBack } from "react-icons/bi";
 import Link from "next/link";
+import Button from "@/app/components/Button/Button";
+import Loader from "@/app/components/Loader/Loader";
 
 type DetailProps = {
   params?: any;
@@ -15,6 +16,7 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
   const router = useRouter();
 
   const [country, setCountry] = useState<Country>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/alpha/${params?.code}`)
@@ -22,7 +24,17 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
       .then((data) => setCountry(data[0]));
   }, [params?.code]);
 
-  if (!country) return <div>Loading...</div>;
+  useEffect(() => {
+    if (country) setLoading(false);
+  }, [country]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!country) {
+    return <div></div>;
+  }
 
   return (
     <main>

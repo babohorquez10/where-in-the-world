@@ -14,6 +14,7 @@ module.exports = {
       },
       spacing: {
         search: "500px",
+        loader: "40vh",
       },
     },
   },
