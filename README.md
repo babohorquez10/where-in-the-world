@@ -1,7 +1,23 @@
+# Where In The World
+
+## Technologies I used:
+
+- NextJS.
+- ReactJS.
+- Tailwind CSS.
+- Axios.
+- Jest.
+- React Testing Library.
 
 ## Run project
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -14,8 +30,6 @@ pnpm dev
 Open [http://localhost:3000](http://localhost:3000).
 
 ## Run tests
-
-First, run the development server:
 
 ```bash
 npm run test
