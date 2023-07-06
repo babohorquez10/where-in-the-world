@@ -26,7 +26,7 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
 
   return (
     <main>
-      <div className="my-20">
+      <div className="mb-10 md:mb-20">
         <Link href={"/"}>
           <Button onClick={() => router.back()}>
             <div className="flex items-center gap-2">
@@ -36,7 +36,7 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
           </Button>
         </Link>
       </div>
-      <div className="flex gap-40">
+      <div className="flex gap-4 md:gap-20 lg:gap-40 flex-col md:flex-row">
         <div className="align-left">
           <img
             className="max-h-96"
@@ -49,7 +49,7 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
             {country.name.common}
           </h2>
 
-          <div className="flex gap-40">
+          <div className="flex gap-0 md:gap-20 lg:gap-40 flex-col md:flex-row">
             <div>
               <div className="font-light mb-2">
                 <span className="font-semibold">Native Name:</span>{" "}
@@ -87,8 +87,10 @@ const Detail: React.FC<DetailProps> = ({ params }) => {
 
           {country.borders && country.borders.length > 0 && (
             <div className="mt-10">
-              <span className="mr-4 font-semibold">Border Countries: </span>
-              <span className="inline-block">
+              <div className="mr-4 font-semibold mb-4 md:mb-0 md:inline">
+                Border Countries:{" "}
+              </div>
+              <span className="block md:inline-block">
                 <span className="flex gap-4 flex-wrap">
                   {country.borders?.map((countryCode) => (
                     <Link key={countryCode} href={`/detail/${countryCode}`}>
