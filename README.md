@@ -10,8 +10,8 @@
 - React Testing Library.
 - Redux (react-redux and redux-toolkit).
 
-**Note**
-I use redux for state-management in the ``main`` branch. Additionaly, there is another branch called ``local-state-management`` where I use local states.
+> **Note**
+> I use redux for state-management in the ``main`` branch. Additionaly, there is another branch called ``local-state-management`` where I use local states.
 
 ## Run project
 
